@@ -1,4 +1,3 @@
-import { FileText, TrendingUp, Zap, BarChart3, Plus, Sparkles } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { ContentCard } from "@/components/ui/ContentCard";
 import { Button } from "@/components/ui/button";
@@ -8,10 +7,10 @@ interface DashboardProps {
 }
 
 const stats = [
-  { label: "Total Content", value: "0", change: "+12%", icon: FileText, iconClassName: "bg-primary/10 text-primary" },
-  { label: "Engagement Rate", value: "8.4%", change: "+2.3%", icon: TrendingUp, iconClassName: "bg-violet-500/10 text-violet-500" },
-  { label: "Active Platforms", value: "4", change: "100%", icon: Zap, iconClassName: "bg-amber-500/10 text-amber-500" },
-  { label: "Avg. Performance", value: "94%", change: "+5.1%", icon: BarChart3, iconClassName: "bg-success/10 text-success" },
+  { label: "Total Content", value: "0", change: "+12%", color: "primary" },
+  { label: "Engagement Rate", value: "8.4%", change: "+2.3%", color: "violet" },
+  { label: "Active Platforms", value: "4", change: "100%", color: "amber" },
+  { label: "Avg. Performance", value: "94%", change: "+5.1%", color: "success" },
 ];
 
 const recentContent = [
@@ -34,19 +33,18 @@ export function Dashboard({ onCreateClick }: DashboardProps) {
             Ready to create amazing content today?
           </p>
         </div>
-        <Button onClick={onCreateClick} size="lg" className="gap-2 shadow-lg shadow-primary/20">
-          <Plus className="w-4 h-4" />
+        <Button onClick={onCreateClick} size="lg" className="gap-2 shadow-lg glow-primary">
           Create Content
         </Button>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children">
         {stats.map((stat, index) => (
           <StatCard
             key={stat.label}
             {...stat}
-            delay={index * 50}
+            delay={index * 80}
           />
         ))}
       </div>
@@ -57,25 +55,25 @@ export function Dashboard({ onCreateClick }: DashboardProps) {
           <h2 className="text-xl font-semibold text-foreground">
             Recent Content
           </h2>
-          <button className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+          <button className="text-sm font-medium text-primary hover:text-primary/80 transition-smooth">
             View all
           </button>
         </div>
 
         {recentContent.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-3 stagger-children">
             {recentContent.map((content, index) => (
               <ContentCard
                 key={content.title}
                 {...content}
-                delay={index * 50}
+                delay={index * 80}
               />
             ))}
           </div>
         ) : (
-          <div className="bg-card rounded-2xl border border-border/50 p-12 text-center card-interactive">
-            <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-8 h-8 text-muted-foreground" />
+          <div className="glass-card rounded-3xl p-12 text-center card-interactive">
+            <div className="w-16 h-16 rounded-2xl glass-subtle flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl font-bold text-muted-foreground">+</span>
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">
               No content yet
@@ -84,7 +82,6 @@ export function Dashboard({ onCreateClick }: DashboardProps) {
               Create your first AI-powered content and see it appear here.
             </p>
             <Button onClick={onCreateClick} className="gap-2">
-              <Plus className="w-4 h-4" />
               Get Started
             </Button>
           </div>

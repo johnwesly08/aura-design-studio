@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, Sparkles, Loader2, Linkedin, Twitter, Instagram, BookOpen, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PlatformButton } from "@/components/ui/PlatformButton";
 import { cn } from "@/lib/utils";
@@ -11,10 +10,10 @@ interface CreateContentProps {
 }
 
 const platforms = [
-  { id: "twitter", label: "Twitter / X", icon: Twitter },
-  { id: "linkedin", label: "LinkedIn", icon: Linkedin },
-  { id: "instagram", label: "Instagram", icon: Instagram },
-  { id: "blog", label: "Blog Post", icon: BookOpen },
+  { id: "twitter", label: "Twitter / X" },
+  { id: "linkedin", label: "LinkedIn" },
+  { id: "instagram", label: "Instagram" },
+  { id: "blog", label: "Blog Post" },
 ];
 
 export function CreateContent({ onBack, onGenerate, isGenerating }: CreateContentProps) {
@@ -36,11 +35,10 @@ export function CreateContent({ onBack, onGenerate, isGenerating }: CreateConten
   };
 
   return (
-    <div className="max-w-3xl mx-auto animate-fade-in-up">
+    <div className="max-w-3xl mx-auto animate-slide-up">
       {/* Badge */}
       <div className="flex justify-center mb-6">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary">
-          <Sparkles className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-subtle text-primary">
           <span className="text-sm font-medium">AI-Powered Content Engine</span>
         </div>
       </div>
@@ -56,7 +54,7 @@ export function CreateContent({ onBack, onGenerate, isGenerating }: CreateConten
       </div>
 
       {/* Form Card */}
-      <div className="bg-card rounded-3xl border border-border/50 p-8 shadow-card">
+      <div className="glass-elevated rounded-3xl p-8 animate-scale-in" style={{ animationDelay: "100ms" }}>
         {/* Textarea */}
         <div className="mb-8">
           <textarea
@@ -66,10 +64,10 @@ export function CreateContent({ onBack, onGenerate, isGenerating }: CreateConten
             rows={5}
             className={cn(
               "w-full px-5 py-4 rounded-2xl resize-none",
-              "bg-muted/50 border border-border/50",
+              "glass-input",
               "text-foreground placeholder:text-muted-foreground",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
-              "transition-apple"
+              "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40",
+              "transition-smooth"
             )}
           />
           <div className="flex justify-end mt-2">
@@ -97,29 +95,17 @@ export function CreateContent({ onBack, onGenerate, isGenerating }: CreateConten
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-between pt-4 border-t border-border/50">
+        <div className="flex items-center justify-between pt-4 border-t border-white/20">
           <div className="flex items-center gap-2 text-muted-foreground">
-            <Lightbulb className="w-4 h-4" />
             <span className="text-sm">Be specific about your audience for better results</span>
           </div>
           <Button
             onClick={handleGenerate}
             disabled={!canGenerate || isGenerating}
             size="lg"
-            className="gap-2 shadow-lg shadow-primary/20"
+            className="gap-2 shadow-lg glow-primary"
           >
-            {isGenerating ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Generating...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4" />
-                Generate Content
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
+            {isGenerating ? "Generating..." : "Generate Content"}
           </Button>
         </div>
       </div>
@@ -128,9 +114,8 @@ export function CreateContent({ onBack, onGenerate, isGenerating }: CreateConten
       <div className="mt-6 text-center">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-smooth"
         >
-          <ArrowLeft className="w-4 h-4" />
           Back to Dashboard
         </button>
       </div>
