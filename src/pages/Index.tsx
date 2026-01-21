@@ -84,7 +84,7 @@ export default function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background bg-gradient-mesh">
       <Header activeTab={activeTab} onTabChange={handleTabChange} />
       
       <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8">

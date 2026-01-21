@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ArrowLeft, RefreshCw, Check, Sparkles, Copy, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -32,16 +31,15 @@ export function ReviewContent({
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-smooth mb-6"
       >
-        <ArrowLeft className="w-4 h-4" />
         Back to Editor
       </button>
 
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* AI Generated Panel */}
-        <div className="bg-card rounded-3xl border border-border/50 p-6 shadow-card">
+        <div className="glass-elevated rounded-3xl p-6 animate-scale-in">
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-lg font-semibold text-foreground">
@@ -51,15 +49,14 @@ export function ReviewContent({
                 Powered by advanced AI
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
-              <Sparkles className="w-3 h-3" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle text-primary text-xs font-medium">
               Auto-generated
             </div>
           </div>
           
           <div className={cn(
             "rounded-2xl p-5 min-h-[400px]",
-            "bg-muted/50 border border-border/50",
+            "glass-input",
             "text-sm leading-relaxed text-foreground whitespace-pre-wrap"
           )}>
             {generatedContent}
@@ -70,20 +67,15 @@ export function ReviewContent({
               variant="outline"
               onClick={onRegenerate}
               disabled={isRegenerating}
-              className="gap-2 flex-1"
+              className="gap-2 flex-1 glass-subtle border-white/30 hover:border-primary/30"
             >
-              {isRegenerating ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <RefreshCw className="w-4 h-4" />
-              )}
-              Regenerate
+              {isRegenerating ? "Regenerating..." : "Regenerate"}
             </Button>
           </div>
         </div>
 
         {/* Human Refinement Panel */}
-        <div className="bg-card rounded-3xl border border-border/50 p-6 shadow-card">
+        <div className="glass-elevated rounded-3xl p-6 animate-scale-in" style={{ animationDelay: "100ms" }}>
           <div className="mb-5">
             <h2 className="text-lg font-semibold text-foreground">
               Your Refined Version
@@ -98,10 +90,10 @@ export function ReviewContent({
             onChange={(e) => setRefinedContent(e.target.value)}
             className={cn(
               "w-full min-h-[400px] rounded-2xl p-5",
-              "bg-muted/50 border border-border/50",
+              "glass-input",
               "text-sm leading-relaxed text-foreground resize-none",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
-              "transition-apple"
+              "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40",
+              "transition-smooth"
             )}
           />
 
@@ -109,25 +101,14 @@ export function ReviewContent({
             <Button
               variant="outline"
               onClick={handleCopy}
-              className="gap-2"
+              className="gap-2 glass-subtle border-white/30 hover:border-primary/30"
             >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4" />
-                  Copied
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4" />
-                  Copy
-                </>
-              )}
+              {copied ? "Copied" : "Copy"}
             </Button>
             <Button
               onClick={onFinalize}
-              className="gap-2 flex-1 shadow-lg shadow-primary/20"
+              className="gap-2 flex-1 shadow-lg glow-primary"
             >
-              <Check className="w-4 h-4" />
               Finalize Content
             </Button>
           </div>
